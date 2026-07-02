@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UndosaTech — Research Data Reuse for Vision Science & Neuroscience</title>
+<meta name="description" content="Infrastructure for reusing archived research data in vision science and neuroscience. Pre-launch, Dundee, Scotland.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg width="30" height="30" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg"><rect x="72" y="78" width="36" height="24" fill="#EF4444"/><rect x="68" y="74" width="8" height="32" rx="1" fill="#EF4444"/><rect x="104" y="74" width="8" height="32" rx="1" fill="#EF4444"/><line x1="52" y1="58" x2="78" y2="28" stroke="#EF4444" stroke-width="14"/><line x1="128" y1="58" x2="102" y2="28" stroke="#EF4444" stroke-width="14"/><line x1="52" y1="122" x2="78" y2="152" stroke="#EF4444" stroke-width="14"/><line x1="128" y1="122" x2="102" y2="152" stroke="#EF4444" stroke-width="14"/><circle cx="40" cy="90" r="36" fill="#181d27" stroke="#06B6D4" stroke-width="9"/><circle cx="140" cy="90" r="36" fill="#181d27" stroke="#f2f3f7" stroke-width="9" opacity=".88"/><circle cx="90" cy="18" r="13" fill="#181d27" stroke="#06B6D4" stroke-width="7"/><circle cx="90" cy="162" r="13" fill="#181d27" stroke="#06B6D4" stroke-width="7"/><circle cx="4" cy="90" r="6" fill="#06B6D4"/><circle cx="176" cy="90" r="6" fill="#06B6D4"/></svg>
+    <span class="nav-logo-name">Undosa<span>Tech</span></span>
+  </a>
+  <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="/" class="active">Home</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/approach.html">Approach</a></li>
+    <li><a href="/reuse.html">Reuse</a></li>
+    <li><a href="/roadmap.html">Roadmap</a></li>
+  </ul>
+  <a href="/get-involved.html" class="nav-cta">Get Involved</a>
+</nav>
+
+<div class="page">
+
+  <!-- ════ HERO ════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="label">Research Data Reuse · Vision Science & Neuroscience · Pre-Launch</div>
+      <h1 class="display">Reusing Archived Research Data in <em>Vision Science</em> and Neuroscience.</h1>
+      <p class="lead">Infrastructure for making already-collected imaging datasets usable again, responsibly, by more than the team that first collected them.</p>
+      <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
+        <a href="/get-involved.html" class="btn btn-accent">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+          Talk to Us
+        </a>
+        <a href="/approach.html" class="btn btn-ghost">How It Works</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <!-- Node diagram: data flowing from institutions to governed reuse -->
+      <svg width="420" height="380" viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Connection lines -->
+        <line x1="90" y1="80" x2="210" y2="190" stroke="#06B6D4" stroke-width="1.5" opacity=".3"/>
+        <line x1="330" y1="80" x2="210" y2="190" stroke="#06B6D4" stroke-width="1.5" opacity=".3"/>
+        <line x1="90" y1="300" x2="210" y2="190" stroke="#06B6D4" stroke-width="1.5" opacity=".3"/>
+        <line x1="330" y1="300" x2="210" y2="190" stroke="#06B6D4" stroke-width="1.5" opacity=".3"/>
+        <!-- Animated dots on lines -->
+        <circle r="3" fill="#06B6D4" opacity=".8"><animateMotion dur="3s" repeatCount="indefinite" path="M90,80 L210,190"/></circle>
+        <circle r="3" fill="#06B6D4" opacity=".8"><animateMotion dur="3.5s" repeatCount="indefinite" path="M330,80 L210,190"/></circle>
+        <circle r="3" fill="#06B6D4" opacity=".8"><animateMotion dur="4s" repeatCount="indefinite" path="M90,300 L210,190"/></circle>
+        <circle r="3" fill="#06B6D4" opacity=".8"><animateMotion dur="3.2s" repeatCount="indefinite" path="M330,300 L210,190"/></circle>
+        <!-- Institution nodes -->
+        <circle cx="90" cy="80" r="48" fill="#1c2230" stroke="#06B6D4" stroke-width="2"/>
+        <text x="90" y="72" text-anchor="middle" fill="#06B6D4" font-size="9" font-weight="600" letter-spacing=".08em">UNIVERSITY</text>
+        <text x="90" y="88" text-anchor="middle" fill="#f2f3f7" font-size="11" font-weight="600">OCT Lab</text>
+        <circle cx="330" cy="80" r="48" fill="#1c2230" stroke="#06B6D4" stroke-width="2"/>
+        <text x="330" y="72" text-anchor="middle" fill="#06B6D4" font-size="9" font-weight="600" letter-spacing=".08em">NHS TRUST</text>
+        <text x="330" y="88" text-anchor="middle" fill="#f2f3f7" font-size="11" font-weight="600">Imaging</text>
+        <circle cx="90" cy="300" r="48" fill="#1c2230" stroke="#06B6D4" stroke-width="2"/>
+        <text x="90" y="292" text-anchor="middle" fill="#06B6D4" font-size="9" font-weight="600" letter-spacing=".08em">RESEARCH</text>
+        <text x="90" y="308" text-anchor="middle" fill="#f2f3f7" font-size="11" font-weight="600">MRI Study</text>
+        <circle cx="330" cy="300" r="48" fill="#1c2230" stroke="#06B6D4" stroke-width="2"/>
+        <text x="330" y="292" text-anchor="middle" fill="#06B6D4" font-size="9" font-weight="600" letter-spacing=".08em">CLINICAL</text>
+        <text x="330" y="308" text-anchor="middle" fill="#f2f3f7" font-size="11" font-weight="600">Trial Data</text>
+        <!-- Central UndosaTech node -->
+        <circle cx="210" cy="190" r="60" fill="#1c2230" stroke="#06B6D4" stroke-width="3"/>
+        <circle cx="210" cy="190" r="52" fill="none" stroke="rgba(6,182,212,.15)" stroke-width="1" stroke-dasharray="4 3"/>
+        <text x="210" y="180" text-anchor="middle" fill="#f2f3f7" font-size="13" font-weight="700" font-family="'Fraunces',Georgia,serif">Undosa</text>
+        <text x="210" y="197" text-anchor="middle" fill="#06B6D4" font-size="13" font-weight="700" font-family="'Fraunces',Georgia,serif">Tech</text>
+        <text x="210" y="214" text-anchor="middle" fill="rgba(242,243,247,.5)" font-size="8" letter-spacing=".1em">GOVERNED REUSE</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ════ THESIS ════ -->
+  <section class="section">
+    <div class="section-narrow">
+      <h2>The <em>thesis</em></h2>
+      <p style="color:var(--white-70)">A great deal of imaging and clinical data collected for biomedical research is used once and then becomes unreachable — sitting on lab servers and old drives, no longer findable, understandable, or approvable for reuse. The consent was given, the money was spent, the science was done, and the data is not lost, but it may as well be.</p>
+      <p style="color:var(--white-70)">This is a governance and infrastructure problem more than a technical one, and it is the problem UndosaTech is being built to work on — starting with a single vertical, vision science, and adjacent neuroscience.</p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ════ ICON GRID ════ -->
+  <section class="section alt">
+    <h2 style="text-align:center">What <em>reuse</em> delivers</h2>
+    <div class="icon-grid" style="max-width:960px;margin-left:auto;margin-right:auto">
+      <div class="icon-item">
+        <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+        <h3>Time compressed</h3>
+        <p>A fresh prospective cohort takes years. A reused one is analysable in months.</p>
+      </div>
+      <div class="icon-item">
+        <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/><path d="M15 18l6-6-6-6" opacity=".4"/><path d="M3 18l6-6-6-6" opacity=".4"/></svg>
+        <h3>New questions, old data</h3>
+        <p>Foundation models can now extract signals from historical images that were not extractable when those images were collected.</p>
+      </div>
+      <div class="icon-item">
+        <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>Less waste</h3>
+        <p>Every dataset reused is one fewer redundant cohort, one fewer patient asked to consent to a study that has already been done.</p>
+      </div>
+      <div class="icon-item">
+        <svg width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <h3>Cost avoided</h3>
+        <p>Harmonising an existing cohort costs orders of magnitude less than collecting an equivalent one from scratch.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ════ COHORT CARD ════ -->
+  <section class="section">
+    <div class="feat-grid">
+      <div class="feat-text">
+        <div class="label">Illustrative</div>
+        <h2>What a reusable cohort might <em>look like</em></h2>
+        <p style="color:var(--white-70)">The card format is designed so a researcher can decide in thirty seconds whether a cohort is worth applying to access.</p>
+      </div>
+      <div style="display:flex;justify-content:center">
+        <div class="cohort-card">
+          <div class="cohort-corner">Illustrative</div>
+          <div class="cohort-label">Cohort · Vision Science · OCT</div>
+          <h3>Paediatric myopia progression, 2018–2021</h3>
+          <p>A hypothetical cohort of school-age children with sequential spectral-domain OCT and axial length measurements over 30 months of follow-up. Original study completed and published.</p>
+          <div class="cohort-meta">
+            <div>Participants <span>~1,240</span></div>
+            <div>Sites <span>3</span></div>
+            <div>Modality <span>SD-OCT</span></div>
+          </div>
+          <p class="cohort-note">No cohort of this description is currently under management. This is a design sketch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ STATUS ════ -->
+  <section class="section alt">
+    <div class="section-narrow">
+      <div class="status">
+        <h3>Where things stand</h3>
+        <p>There is no live platform, no cohorts under management, and no institutional partnerships signed. The site describes what UndosaTech intends to build, not what it has built.</p>
+      </div>
+      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+        <a href="/roadmap.html" class="btn btn-ghost">View Roadmap</a>
+        <a href="/get-involved.html" class="btn btn-accent">Get Involved</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <a href="/" class="footer-logo"><span class="footer-logo-name">Undosa<span>Tech</span></span></a>
+  <span class="footer-copy">Dundee, Scotland · Pre-launch 2026</span>
+  <a href="mailto:hello@undosatech.com" class="footer-email">hello@undosatech.com</a>
+</footer>
+
+<script>
+const btn=document.querySelector('.nav-toggle'),links=document.getElementById('nav-links');
+btn?.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false')});
+</script>
+</body>
+</html>
