@@ -1,0 +1,65 @@
+# -----------------------------------------------------------------------------
+# Netlify configuration for UndosaTech marketing site
+# -----------------------------------------------------------------------------
+# This site is plain static HTML. No build step required — Netlify serves the
+# files as-is from the repository root.
+# -----------------------------------------------------------------------------
+
+[build]
+  publish = "."
+
+# Pretty URLs — allow /about instead of /about.html
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/approach"
+  to = "/approach.html"
+  status = 200
+
+[[redirects]]
+  from = "/reuse"
+  to = "/reuse.html"
+  status = 200
+
+[[redirects]]
+  from = "/roadmap"
+  to = "/roadmap.html"
+  status = 200
+
+[[redirects]]
+  from = "/get-involved"
+  to = "/get-involved.html"
+  status = 200
+
+# Security headers — appropriate for a marketing site with no logged-in area.
+# When user authentication is added later, these will need revisiting.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Content-Security-Policy = "default-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+
+# Cache stylesheet aggressively — filename-versioned when it changes materially.
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# HTML pages should revalidate frequently — small site, low bandwidth cost.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+# 404 handling — a static 404 page shipped in the repo.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
