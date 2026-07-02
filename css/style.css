@@ -118,8 +118,12 @@ hr.divider{border:none;border-top:1px solid var(--rule);margin:0 52px}
 .cohort-note{font-style:italic;font-size:13px;color:var(--white-50);margin-top:14px;padding-top:12px;border-top:1px dashed var(--rule)}
 
 /* ── WORKFLOW DIAGRAM ── */
-.diagram-wrapper{display:flex;align-items:center;justify-content:center;padding:20px 0}
+.diagram-wrapper{display:flex;align-items:center;justify-content:center;padding:20px 0;margin-top:32px;overflow-x:auto}
 .diagram-wrapper svg{max-width:100%;height:auto}
+@media(max-width:900px){
+  .diagram-wrapper{justify-content:flex-start}
+  .diagram-wrapper svg{max-width:none;width:760px;flex-shrink:0}
+}
 
 /* ── TIMELINE ── */
 .timeline{margin-top:40px}
