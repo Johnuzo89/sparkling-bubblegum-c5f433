@@ -192,3 +192,21 @@ footer{padding:32px 52px;background:var(--bg-2);border-top:1px solid var(--rule)
 .footer-legal{font-size:12px;color:var(--white-25)}
 .footer-legal a{color:var(--white-25);text-decoration:none}
 .footer-legal a:hover{color:var(--accent)}
+
+/* ── EVIDENCE STAT BAND ── */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:var(--radius);overflow:hidden;margin-top:48px}
+.stat{background:var(--bg-2);padding:32px 28px}
+.stat-num{font-family:var(--font-serif);font-size:44px;font-weight:700;line-height:1;color:var(--accent);margin-bottom:10px;letter-spacing:-.02em}
+.stat-desc{font-size:13px;color:var(--white-70);line-height:1.6;margin-bottom:12px}
+.stat-src{font-size:11px;color:var(--white-50)}
+.stat-src a{color:var(--white-50);border-bottom:1px dotted var(--white-25)}
+.stat-src a:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ── GOVERNANCE STRIP ── */
+.gov-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+.gov-pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--white-70);border:1px solid var(--rule-mid);border-radius:99px;padding:8px 16px;background:var(--bg-2)}
+.gov-pill svg{color:var(--accent);flex-shrink:0}
+
+/* ── LINKED SOURCES ── */
+.sources li a{color:var(--white-50);border-bottom:1px dotted var(--white-25)}
+.sources li a:hover{color:var(--accent);border-color:var(--accent)}

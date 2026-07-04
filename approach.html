@@ -6,7 +6,7 @@
   <!-- ── WORKFLOW DIAGRAM ── -->
   <section class="section alt">
     <h2 style="text-align:center;margin-bottom:8px">How the <em>pieces</em> fit together</h2>
-    <p style="text-align:center;color:var(--white-50);font-size:14px;margin-bottom:40px">The planned flow from archived data to approved reuse.</p>
+    <p style="text-align:center;color:var(--white-50);font-size:14px;margin-bottom:40px">The flow from archived data to approved reuse.</p>
     <div class="diagram-wrapper">
       <svg width="860" height="160" viewBox="0 0 860 160" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Step boxes -->
@@ -76,16 +76,12 @@
 
   <hr class="divider">
 
-  <!-- ── NOT TRYING TO BE ── -->
+  <!-- ── FEDERATED ── -->
   <section class="section alt"><div class="section-narrow">
-    <h2>What UndosaTech is <em>not</em> trying to be</h2>
-    <p style="color:var(--white-70)">Other well-funded organisations already do the work below, and it would be a mistake for an early-stage project to compete on those axes.</p>
-    <ul style="margin-top:16px">
-      <li>A general federated-learning platform.</li>
-      <li>A replacement for the NHS Secure Data Environment programme.</li>
-      <li>A new foundation model for medical imaging.</li>
-      <li>A regulated medical device.</li>
-    </ul>
+    <h2>Federated analysis, so data <em>never moves</em></h2>
+    <p style="color:var(--white-70)">Where a study spans more than one institution, UndosaTech uses federated learning: the model travels to each site, trains against the data in place, and only aggregate weight updates return — optionally under differential privacy. No patient-level records are copied, pooled, or transferred at any point.</p>
+    <p style="color:var(--white-70)">This is a proven method, not an experiment. Federated models have achieved ~99% of centralised performance in multi-institutional brain-imaging studies (<a href="https://doi.org/10.1038/s41598-020-69250-1" rel="noopener">Sheller et al., Scientific Reports, 2020</a>), and a single clinical model has been trained across 20 institutions worldwide without any data sharing (<a href="https://doi.org/10.1038/s41591-021-01506-3" rel="noopener">Dayan et al., Nature Medicine, 2021</a>).</p>
+    <p style="color:var(--white-70)">For a data custodian, the practical effect is that participation does not create a new copy of the dataset anywhere — which shortens governance review, keeps the institution in control, and aligns with UK GDPR Article 89 research safeguards and the <a href="https://doi.org/10.1038/sdata.2016.18" rel="noopener">FAIR principles</a> that UK funders now expect.</p>
   </div></section>
 </div>
 <footer><a href="/" class="footer-logo"><span class="footer-logo-name">Undosa<span>Tech</span></span></a><span class="footer-copy">Dundee, Scotland · Pre-launch 2026</span><span class="footer-legal"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/trust.html">Trust &amp; Security</a></span><a href="mailto:hello@undosatech.com" class="footer-email">hello@undosatech.com</a></footer>
