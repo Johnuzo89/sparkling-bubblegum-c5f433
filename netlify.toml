@@ -49,6 +49,11 @@
   to = "/trust.html"
   status = 200
 
+[[redirects]]
+  from = "/node-deployment"
+  to = "/node-deployment.html"
+  status = 200
+
 # Security headers — appropriate for a marketing site with no logged-in area.
 # When user authentication is added later, these will need revisiting.
 [[headers]]

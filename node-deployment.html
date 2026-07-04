@@ -1,0 +1,113 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Node Deployment — UndosaTech</title><meta name="description" content="Deployment guide for the UndosaTech FL node: outbound-only network posture, egress allow-list, data flows, and supply-chain verification. Written for institutional IT reviewers."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/css/style.css"></head><body>
+<nav><a href="/" class="nav-logo"><svg width="30" height="30" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg"><rect x="72" y="78" width="36" height="24" fill="#EF4444"/><rect x="68" y="74" width="8" height="32" rx="1" fill="#EF4444"/><rect x="104" y="74" width="8" height="32" rx="1" fill="#EF4444"/><line x1="52" y1="58" x2="78" y2="28" stroke="#EF4444" stroke-width="14"/><line x1="128" y1="58" x2="102" y2="28" stroke="#EF4444" stroke-width="14"/><line x1="52" y1="122" x2="78" y2="152" stroke="#EF4444" stroke-width="14"/><line x1="128" y1="122" x2="102" y2="152" stroke="#EF4444" stroke-width="14"/><circle cx="40" cy="90" r="36" fill="#181d27" stroke="#06B6D4" stroke-width="9"/><circle cx="140" cy="90" r="36" fill="#181d27" stroke="#f2f3f7" stroke-width="9" opacity=".88"/><circle cx="90" cy="18" r="13" fill="#181d27" stroke="#06B6D4" stroke-width="7"/><circle cx="90" cy="162" r="13" fill="#181d27" stroke="#06B6D4" stroke-width="7"/><circle cx="4" cy="90" r="6" fill="#06B6D4"/><circle cx="176" cy="90" r="6" fill="#06B6D4"/></svg><span class="nav-logo-name">Undosa<span>Tech</span></span></a><button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button><ul class="nav-links" id="nav-links"><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/approach.html">Approach</a></li><li><a href="/reuse.html">Reuse</a></li><li><a href="/roadmap.html">Roadmap</a></li></ul><a href="/get-involved.html" class="nav-cta">Get Involved</a></nav>
+<div class="page">
+  <div class="page-hero"><div class="label">Node Deployment</div><h1>One container. <em>Outbound-only</em>.</h1><p class="page-hero-sub">The deployment guide for the UndosaTech FL node, written for institutional IT and information-governance reviewers. Last updated 4 July 2026.</p></div>
+
+  <section class="section"><div class="section-wide" style="max-width:860px">
+
+    <h2>What the node is</h2>
+    <p style="color:var(--white-70)">A single Docker container your institution runs on its own infrastructure, next to its data. It lets your institution participate in federated studies without any patient-level data leaving your network. It requires no inbound firewall changes, no VPN, and no public IP.</p>
+
+    <div class="diagram-wrapper">
+      <svg viewBox="0 0 920 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data flow: patient data stays inside the institution; only model updates and heartbeats cross the boundary outbound">
+        <!-- institution boundary -->
+        <rect x="20" y="40" width="420" height="300" rx="6" fill="none" stroke="#06B6D4" stroke-width="1.5" stroke-dasharray="7 5" opacity=".55"/>
+        <text x="36" y="66" fill="#06B6D4" font-size="11" font-weight="600" letter-spacing=".1em">YOUR INSTITUTION</text>
+        <!-- data store -->
+        <g>
+          <rect x="52" y="120" width="150" height="100" rx="4" fill="#232a3a" stroke="#EF4444" stroke-width="1.5"/>
+          <ellipse cx="102" cy="152" rx="20" ry="7" stroke="#EF4444" stroke-width="1.5" fill="none"/>
+          <path d="M82 152v26c0 4 9 7 20 7s20-3 20-7v-26" stroke="#EF4444" stroke-width="1.5" fill="none"/>
+          <rect x="152" y="158" width="22" height="17" rx="2" stroke="#EF4444" stroke-width="1.5" fill="none"/>
+          <path d="M156 158v-5a7 7 0 0 1 14 0v5" stroke="#EF4444" stroke-width="1.5" fill="none"/>
+          <text x="127" y="206" text-anchor="middle" fill="#f2f3f7" font-size="11" font-weight="600">PATIENT DATA</text>
+          <text x="127" y="236" text-anchor="middle" fill="#EF4444" font-size="10" font-weight="600">NEVER LEAVES</text>
+        </g>
+        <!-- read-only arrow -->
+        <line x1="202" y1="170" x2="262" y2="170" stroke="#f2f3f7" stroke-width="1.5" opacity=".4"/>
+        <path d="M256 165l8 5-8 5" stroke="#f2f3f7" stroke-width="1.5" opacity=".4" fill="none"/>
+        <text x="232" y="160" text-anchor="middle" fill="rgba(242,243,247,.5)" font-size="9">read-only</text>
+        <!-- node container -->
+        <g>
+          <rect x="264" y="120" width="150" height="100" rx="4" fill="#1c2230" stroke="#06B6D4" stroke-width="2"/>
+          <text x="339" y="158" text-anchor="middle" fill="#f2f3f7" font-size="12" font-weight="700">FL NODE</text>
+          <text x="339" y="175" text-anchor="middle" fill="rgba(242,243,247,.5)" font-size="10">Docker container</text>
+          <text x="339" y="196" text-anchor="middle" fill="#06B6D4" font-size="10">trains locally</text>
+        </g>
+        <!-- outbound arrows -->
+        <line x1="414" y1="145" x2="608" y2="112" stroke="#06B6D4" stroke-width="1.5" opacity=".5"/>
+        <path d="M600 109l9 2-6 7" stroke="#06B6D4" stroke-width="1.5" opacity=".7" fill="none"/>
+        <text x="512" y="112" text-anchor="middle" fill="rgba(242,243,247,.6)" font-size="10">HTTPS 443 — register · heartbeat · poll</text>
+        <line x1="414" y1="196" x2="608" y2="238" stroke="#06B6D4" stroke-width="1.5" opacity=".5"/>
+        <path d="M599 240l9-1-4 8" stroke="#06B6D4" stroke-width="1.5" opacity=".7" fill="none"/>
+        <text x="512" y="232" text-anchor="middle" fill="rgba(242,243,247,.6)" font-size="10">gRPC 8001 — weight updates, study rounds only</text>
+        <circle r="3.5" fill="#06B6D4"><animateMotion dur="3s" repeatCount="indefinite" path="M414,145 L608,112"/></circle>
+        <circle r="3.5" fill="#06B6D4"><animateMotion dur="2.4s" repeatCount="indefinite" path="M414,196 L608,238"/></circle>
+        <!-- orchestrator -->
+        <g>
+          <rect x="610" y="70" width="270" height="90" rx="4" fill="#232a3a" stroke="#06B6D4" stroke-width="1.5"/>
+          <text x="745" y="106" text-anchor="middle" fill="#f2f3f7" font-size="12" font-weight="700">UNDOSATECH ORCHESTRATOR</text>
+          <text x="745" y="126" text-anchor="middle" fill="rgba(242,243,247,.5)" font-size="10">registry · audit trail · study coordination</text>
+          <text x="745" y="143" text-anchor="middle" fill="rgba(242,243,247,.5)" font-size="10">undosatech-production.up.railway.app</text>
+        </g>
+        <g>
+          <rect x="610" y="200" width="270" height="90" rx="4" fill="#232a3a" stroke="#06B6D4" stroke-width="1.5"/>
+          <text x="745" y="236" text-anchor="middle" fill="#f2f3f7" font-size="12" font-weight="700">AGGREGATION (FLOWER)</text>
+          <text x="745" y="256" text-anchor="middle" fill="rgba(242,243,247,.5)" font-size="10">combines weight updates from all sites</text>
+          <text x="745" y="273" text-anchor="middle" fill="rgba(242,243,247,.5)" font-size="10">active only while a study runs</text>
+        </g>
+        <!-- legend -->
+        <g font-size="10">
+          <text x="36" y="322" fill="rgba(242,243,247,.5)">All connections are initiated inside the institution, outbound. No inbound ports are opened.</text>
+        </g>
+      </svg>
+    </div>
+
+    <h2 style="margin-top:56px">Egress allow-list</h2>
+    <p style="color:var(--white-70)">The node initiates connections to exactly these destinations. The training endpoint is never hard-coded: the orchestrator returns it at study start, and it is always within this list.</p>
+    <table class="tbl">
+      <tr><th>Destination</th><th>Port / protocol</th><th>Purpose</th><th>When</th></tr>
+      <tr><td><code>undosatech-production.up.railway.app</code></td><td>443 / HTTPS</td><td>Registration, heartbeat, assignment polling, deregistration</td><td>Continuous</td></tr>
+      <tr><td><code>undosatech-production.up.railway.app</code></td><td>8001 / gRPC (TLS)</td><td>Federated training session — model weights in, weight updates out</td><td>Only while a study your institution accepted is training</td></tr>
+      <tr><td>Docker Hub (<code>registry-1.docker.io</code>, <code>auth.docker.io</code>)</td><td>443 / HTTPS</td><td>Image pull</td><td>Install and updates only</td></tr>
+    </table>
+    <p style="color:var(--white-50);font-size:13px">Institutional egress proxies are supported via standard <span class="codeline">HTTPS_PROXY</span> / <span class="codeline">NO_PROXY</span> environment variables.</p>
+
+    <h2 style="margin-top:56px">What crosses the boundary</h2>
+    <table class="tbl">
+      <tr><th>Leaves your institution</th><th>Never leaves</th></tr>
+      <tr>
+        <td>Registration metadata you configure (institution name, domain, contact email, declared capabilities) · heartbeats (status, latency) · during an accepted study only: model weight updates and aggregate metrics (loss, accuracy, sample counts) per round</td>
+        <td>Patient-level data, images, or files. The data directory is mounted <strong>read-only</strong> and is read only by the local training loop. Weight updates can additionally carry differential-privacy noise, configured per study and visible in the study invitation.</td>
+      </tr>
+    </table>
+    <p style="color:var(--white-70)">Every governance-relevant event — registration, invitation, acceptance, each training round — is recorded in the platform's hash-chained audit trail, and the node's own activity is fully visible locally via <span class="codeline">docker logs</span>.</p>
+
+    <h2 style="margin-top:56px">Requirements &amp; install</h2>
+    <ul style="color:var(--white-70)">
+      <li>Linux server or VM with Docker Engine ≥ 20.10 and Docker Compose ≥ 2.0</li>
+      <li>4 GB+ RAM; CPU training works, a CUDA GPU is used automatically when available</li>
+      <li>Outbound access per the allow-list above — no inbound rules, no public IP, NAT is fine</li>
+    </ul>
+    <pre class="code">curl -O https://app.undosatech.com/docker-compose.node.yml
+# create .env.node from the template inside that file
+docker compose -f docker-compose.node.yml up -d</pre>
+    <p style="color:var(--white-70)">The node appears in the platform's Nodes tab within about 30 seconds. Institutional domains (<span class="codeline">.ac.uk</span>, <span class="codeline">.nhs.uk</span>, <span class="codeline">.edu</span>) are approved automatically; others are reviewed manually.</p>
+
+    <h2 style="margin-top:56px">Supply-chain verification</h2>
+    <p style="color:var(--white-70)">Node images are built by GitHub Actions from the public repository, tagged by commit, and signed with <a href="https://www.sigstore.dev" rel="noopener">Sigstore</a> cosign using the build's GitHub OIDC identity. A CycloneDX software bill of materials (SBOM) is generated for every build and attached as a signed attestation, so your security team can verify exactly what is inside the container before running it:</p>
+    <pre class="code">cosign verify undosatech/fl-node:latest \
+  --certificate-identity-regexp "^https://github.com/Johnuzo89/undosatech" \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com</pre>
+    <p style="color:var(--white-50);font-size:13px">For production, pin a digest rather than <span class="codeline">latest</span>.</p>
+
+    <h2 style="margin-top:56px">Offboarding</h2>
+    <p style="color:var(--white-70)">Stop the container (<span class="codeline">docker compose down</span>) — it deregisters on shutdown. Remove the credentials volume to destroy the node's API key locally; the key is also invalidated server-side when the node record is removed. Because your data was never copied anywhere, there is nothing remote to delete beyond the registration metadata, which is removed with the node record.</p>
+
+    <p style="color:var(--white-70);margin-top:40px">Questions from IT or IG reviewers: <a href="mailto:security@undosatech.com">security@undosatech.com</a> · See also <a href="/trust.html">Trust &amp; Security</a>.</p>
+
+  </div></section>
+</div>
+<footer><a href="/" class="footer-logo"><span class="footer-logo-name">Undosa<span>Tech</span></span></a><span class="footer-copy">Dundee, Scotland · Pre-launch 2026</span><span class="footer-legal"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/trust.html">Trust &amp; Security</a> · <a href="/node-deployment.html">Node Deployment</a></span><a href="mailto:hello@undosatech.com" class="footer-email">hello@undosatech.com</a></footer>
+<script>const btn=document.querySelector('.nav-toggle'),links=document.getElementById('nav-links');btn?.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false')})</script>
+</body></html>
