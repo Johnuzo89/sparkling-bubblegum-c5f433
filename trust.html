@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trust &amp; Security — UndosaTech</title><meta name="description" content="How the UndosaTech platform protects data: federated architecture, disclosure control, audit trails, and the certification roadmap. Written for information governance reviewers."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="stylesheet" href="/css/style.css"></head><body>
+<nav><a href="/" class="nav-logo"><svg width="30" height="30" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg"><rect x="72" y="78" width="36" height="24" fill="#EF4444"/><rect x="68" y="74" width="8" height="32" rx="1" fill="#EF4444"/><rect x="104" y="74" width="8" height="32" rx="1" fill="#EF4444"/><line x1="52" y1="58" x2="78" y2="28" stroke="#EF4444" stroke-width="14"/><line x1="128" y1="58" x2="102" y2="28" stroke="#EF4444" stroke-width="14"/><line x1="52" y1="122" x2="78" y2="152" stroke="#EF4444" stroke-width="14"/><line x1="128" y1="122" x2="102" y2="152" stroke="#EF4444" stroke-width="14"/><circle cx="40" cy="90" r="36" fill="#181d27" stroke="#06B6D4" stroke-width="9"/><circle cx="140" cy="90" r="36" fill="#181d27" stroke="#f2f3f7" stroke-width="9" opacity=".88"/><circle cx="90" cy="18" r="13" fill="#181d27" stroke="#06B6D4" stroke-width="7"/><circle cx="90" cy="162" r="13" fill="#181d27" stroke="#06B6D4" stroke-width="7"/><circle cx="4" cy="90" r="6" fill="#06B6D4"/><circle cx="176" cy="90" r="6" fill="#06B6D4"/></svg><span class="nav-logo-name">Undosa<span>Tech</span></span></a><button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button><ul class="nav-links" id="nav-links"><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/approach.html">Approach</a></li><li><a href="/reuse.html">Reuse</a></li><li><a href="/roadmap.html">Roadmap</a></li></ul><a href="/get-involved.html" class="nav-cta">Get Involved</a></nav>
+<div class="page">
+  <div class="page-hero"><div class="label">Trust &amp; Security</div><h1>Built for the people who have to <em>say no</em>.</h1><p class="page-hero-sub">This page is written for information governance officers, DPOs, and Caldicott Guardians. It describes what is actually implemented today, what is not yet in place, and the order in which the gaps close. Last updated 4 July 2026.</p></div>
+
+  <section class="section"><div class="section-narrow">
+
+    <h2>The core design decision</h2>
+    <p style="color:var(--white-70)">Patient-level data does not move. The platform's federated architecture sends models and queries to the data, inside the contributing institution's own infrastructure, and only aggregate, disclosure-controlled results return. This is the primary safeguard — everything below is defence in depth behind it.</p>
+
+    <h2 style="margin-top:48px">Implemented and verifiable today</h2>
+    <ul style="color:var(--white-70)">
+      <li><strong>Federated learning</strong> — training runs at participating nodes; only encrypted model weight updates are transmitted, optionally under differential privacy (DP-SGD with per-study privacy budgets).</li>
+      <li><strong>Statistical disclosure control</strong> — aggregate outputs pass through small-cell suppression (minimum cell count of 5) before release; the differential-privacy query console enforces per-cohort epsilon budgets.</li>
+      <li><strong>Tamper-evident audit trail</strong> — every governance-relevant action is written to a hash-chained audit log; any modification of a past record breaks the chain and is detectable via an integrity-verification endpoint.</li>
+      <li><strong>Tenant isolation</strong> — institution-scoped row-level security in the database, so one institution's users cannot read another's records even if application-layer checks were bypassed.</li>
+      <li><strong>Multi-factor authentication</strong> — TOTP (authenticator app) MFA on platform accounts.</li>
+      <li><strong>Transport and application security</strong> — TLS everywhere with HSTS, a strict Content-Security-Policy, security headers on all origins, per-client API rate limiting, and provenance/lineage tracking from dataset to study to model output.</li>
+      <li><strong>Tested, reviewed releases</strong> — every change passes an automated test suite and linting before deployment; deployments are reproducible from version control.</li>
+    </ul>
+    <p style="color:var(--white-70)">Technical documentation, the data protection impact assessment template, and the platform's data use agreement text are available on request: <a href="mailto:hello@undosatech.com">hello@undosatech.com</a>.</p>
+
+    <h2 style="margin-top:48px">Not yet in place — and when it will be</h2>
+    <p style="color:var(--white-70)">In keeping with the rest of this site: no certifications are held today. The roadmap, in order:</p>
+    <ul style="color:var(--white-70)">
+      <li><strong>Cyber Essentials</strong>, then <strong>Cyber Essentials Plus</strong> — self-assessment then independently audited (in progress, 2026).</li>
+      <li><strong>Independent penetration test</strong> — CREST-accredited, with a summary attestation published on this page.</li>
+      <li><strong>NHS Data Security and Protection Toolkit (DSPT)</strong> self-assessment.</li>
+      <li><strong>SATRE self-assessment</strong> — a published mapping of the platform against the Standard Architecture for Trusted Research Environments.</li>
+      <li><strong>ISO 27001</strong> — on the roadmap once the organisation is large enough for it to be meaningful rather than performative.</li>
+    </ul>
+
+    <h2 style="margin-top:48px">Infrastructure and sub-processors</h2>
+    <p style="color:var(--white-70)">The platform's coordination layer runs on Netlify (this website), Vercel (platform frontend), Railway (platform API), and Supabase (authentication and platform database). Because patient-level data stays inside contributing institutions, these providers process account, metadata, and aggregate-result data — not source records. Hosting regions and transfer safeguards are documented as part of the certification work above and available on request.</p>
+
+    <h2 style="margin-top:48px">Reporting a vulnerability</h2>
+    <p style="color:var(--white-70)">If you believe you have found a security issue, email <a href="mailto:security@undosatech.com">security@undosatech.com</a>. Good-faith research conducted without degrading the service or accessing others' data will not be met with legal action, and we will acknowledge reports within three working days.</p>
+
+    <div class="status" style="margin-top:48px">
+      <h3>Why this page exists</h3>
+      <p>Institutional data sharing fails on trust, not technology. The measures above are stated plainly — including what is missing — because an information governance review will find the truth anyway, and it should find it here first.</p>
+    </div>
+
+  </div></section>
+</div>
+<footer><a href="/" class="footer-logo"><span class="footer-logo-name">Undosa<span>Tech</span></span></a><span class="footer-copy">Dundee, Scotland · Pre-launch 2026</span><span class="footer-legal"><a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/trust.html">Trust &amp; Security</a></span><a href="mailto:hello@undosatech.com" class="footer-email">hello@undosatech.com</a></footer>
+<script>const btn=document.querySelector('.nav-toggle'),links=document.getElementById('nav-links');btn?.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false')})</script>
+</body></html>

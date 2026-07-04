@@ -34,6 +34,21 @@
   to = "/get-involved.html"
   status = 200
 
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
+[[redirects]]
+  from = "/trust"
+  to = "/trust.html"
+  status = 200
+
 # Security headers — appropriate for a marketing site with no logged-in area.
 # When user authentication is added later, these will need revisiting.
 [[headers]]
