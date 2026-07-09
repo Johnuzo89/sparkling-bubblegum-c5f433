@@ -14,10 +14,16 @@
   to = "/about.html"
   status = 200
 
+# Approach merged into What We Offer — permanently redirect the old URLs.
 [[redirects]]
   from = "/approach"
-  to = "/approach.html"
-  status = 200
+  to = "/what-we-offer"
+  status = 301
+
+[[redirects]]
+  from = "/approach.html"
+  to = "/what-we-offer"
+  status = 301
 
 [[redirects]]
   from = "/reuse"
