@@ -92,7 +92,7 @@
     <pre class="code">curl -O https://app.undosatech.com/docker-compose.node.yml
 # create .env.node from the template inside that file
 docker compose -f docker-compose.node.yml up -d</pre>
-    <p style="color:var(--white-70)">The node appears in the platform's Nodes tab within about 30 seconds. Institutional domains (<span class="codeline">.ac.uk</span>, <span class="codeline">.nhs.uk</span>, <span class="codeline">.edu</span>) are approved automatically; others are reviewed manually.</p>
+    <p style="color:var(--white-70)">The node appears in the platform's Nodes tab within about 30 seconds, in a pending state. Activation deliberately requires two parties — an institutional email domain alone does not authorise a deployment. First, the institutional authoriser named at registration (a PI, data custodian, or IT/security contact — a different person from the node contact) confirms via an emailed link; then UndosaTech approves the node. Both events are recorded on the tamper-evident audit chain.</p>
 
     <h2 style="margin-top:56px">Supply-chain verification</h2>
     <p style="color:var(--white-70)">Node images are built by GitHub Actions from the public repository, tagged by commit, and signed with <a href="https://www.sigstore.dev" rel="noopener">Sigstore</a> cosign using the build's GitHub OIDC identity. A CycloneDX software bill of materials (SBOM) is generated for every build and attached as a signed attestation, so your security team can verify exactly what is inside the container before running it:</p>
