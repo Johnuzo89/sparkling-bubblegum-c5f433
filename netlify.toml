@@ -26,6 +26,11 @@
   status = 301
 
 [[redirects]]
+  from = "/demo"
+  to = "/demo.html"
+  status = 200
+
+[[redirects]]
   from = "/reuse"
   to = "/reuse.html"
   status = 200
